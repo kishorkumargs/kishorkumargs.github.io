@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rock Paper Scissor</title>
+        <link rel="stylesheet" href="rock-paper-scissor.css">
+    </head>
+    <body>
+        <!-- Toggle theme button -->
+        <button class="toggle-theme" id="theme-toggled">Light Mode</button>
+        <p class="title">Rock Paper Scissors</p>
+        <div class="container">
+            <!-- Buttons to make moves -->
+            <button class="move-button" onclick="playGame('rock')"><img src="icons/rock-emoji.png" class="move-icon" alt="rock"></button>
+            <button class="move-button" onclick="playGame('paper')"><img src="icons/paper-emoji.png" class="move-icon" alt="paper"></button>
+            <button class="move-button" onclick="playGame('scissor')"><img src="icons/scissor-emoji.png" class="move-icon" alt="scissors"></button>
+        </div>
+        
+        <div class="container">
+            <h2><p class="result"></p></h2>
+            <p class="moves"></p>
+            <p class="score">Wins:<span id="win">0</span></p>
+            <p class="score">Loses:<span id="lose">0</span></p>
+            <p class="score">Ties:<span id="tie">0</span></p>
+        </div>
+        <div class="container">
+            <button id="resetScore" onclick="reset()">Reset Score</button>
+        </div>
+        <script src="rock-paper-scissor.js"></script>
+    </body>
+</html>
