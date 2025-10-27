@@ -9,6 +9,22 @@ let ties = document.getElementById('tie');
 let resultText = document.querySelector('.result');
 let moves = document.querySelector('.moves');
 const toggleBtn = document.getElementById('theme-toggled')
+const winSound = new Howl({
+    src: ['sounds/win.wav'],
+    volume: 0.8
+});
+const loseSound = new Howl({
+    src: ['sounds/lose.wav'],
+    volume: 0.8
+});
+const tieSound = new Howl({
+    src: ['sounds/tie.m4a'],
+    volume: 1
+});
+const btnClickSound = new Howl({
+    src: ['sounds/click.mp3'],
+    volume: 1
+});
 
 // Load saved score
 wins.textContent = score.win;
@@ -19,6 +35,7 @@ moves.innerHTML = JSON.parse(localStorage.getItem('moves')) || '';
 
 // Reset progress
 function reset(){
+    btnClickSound.play();
     console.log('Progress reset!');
     score.win = 0;
     score.lose = 0;
@@ -45,6 +62,13 @@ function pickComputerMove(){
         computerMove = 'scissor';
     }
     return computerMove;
+}
+// Play sound based on result
+function playSound(result){
+    // Play sound based on result
+    if(result === 'You win') winSound.play();
+    else if(result === 'You lose') loseSound.play();
+    else if(result === 'Tie') tieSound.play();
 }
 
 // Play game
@@ -101,6 +125,7 @@ function playGame(playerMove){
         ties.textContent = score.tie;
     }
 
+    playSound(result);
     localStorage.setItem('resultText', JSON.stringify(result));
     localStorage.setItem('moves', JSON.stringify(currentMove));
     localStorage.setItem('score', JSON.stringify(score));
@@ -114,6 +139,7 @@ if(localStorage.getItem('theme') === 'light'){
 }
 // Event listener for toggle button
 toggleBtn.addEventListener('click', () => {
+    btnClickSound.play();
     document.body.classList.toggle('light-theme');
     toggleBtn.classList.toggle('toggled');
 
