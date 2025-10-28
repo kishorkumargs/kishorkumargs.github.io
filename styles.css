@@ -1,9 +1,185 @@
-.toggle-theme{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: white;
+/*  Rock-Paper-Scissor Game Stylesheet  */
+
+/* Theme variables */
+:root {
+    --bg-color-dark: rgb(25, 25, 25);
+    --text-color-dark: white;
+    --bg-color-light: white;
+    --text-color-light: rgb(25, 25, 25);
+    --text-color: #222;
+    --card-bg: white;
+}
+
+/*  Global Styles  */
+body{
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, 'Times New Roman', Times, sans-serif;
+    background-color: var(--text-color-light);
+    color: var(--bg-color-light);
+    align-items: center;
+    padding: 20px;
+    padding-top: 0px;
+    margin-top: -10px;
+    transition: background-color 0.4s, color 0.4s;
+}
+body.light-theme{
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+}
+body.light-theme .container, body.light-theme .result-container{
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+    border-color: rgb(25, 25, 25);
+}
+body.light-theme .pop-up-container{
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--text-color-dark);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+body.light-theme .modal-content {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+}
+/* Layout */
+.container, .result-container{
+    align-items: center;
+    border: 3px solid white;
+    border-radius: 10px;
+    width: 550px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.result-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Pop up */
+.pop-up-container{
+    /* Positioning */
+    position: fixed;
+    max-width: 800px;
+    width: 90vw;
+    min-width: 200px;
+    height: 90vh;
+    padding: 10px 20px;
+    margin-top: 25px;
+
+    /* Display styles */
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
     color: rgb(25, 25, 25);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
+    animation: slideIn 0.7s ease-out;
+}
+.pop-up-container.hidden{
+    animation: slideOut 0.7s ease-out;
+}
+.pop-up-content{
+    position: relative;
+    top: 6%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.pop-up-content ul{
+    margin: 0;
+}
+#heading{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+#did-you-know{
+    font-size: 1.2rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Game over pop-up */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    transition: opacity 0.3s ease;
+}
+.hide-model {
+    display: none;
+}
+.modal-content {
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    animation: fadeIn 0.4s ease;
+}
+
+.modal-content h2 {
+    margin-bottom: 1rem;
+}
+
+#restart-btn {
+    background: var(--bg-color-dark);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-weight: bold;
+    transition: background 0.2s ease;
+}
+
+#restart-btn:hover {
+    background: rgb(55, 55, 55);
+}
+
+body.light-theme #restart-btn {
+    background: var(--bg-color-light);
+    color: var(--text-color-light);
+}
+/* Components */
+
+/* Results */
+.title{
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+.scores{
+    margin-bottom: 10px;
+}
+.score{
+    margin: 10px 0;
+}
+.result{
+    margin: 16px;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Buttons */
+.toggle-theme, .close-btn{
     padding: 8px 15px;
     font-size: 15px;
     font-weight: bold;
@@ -12,54 +188,38 @@
     cursor: pointer;
     transition: background-color 0.2s;
 }
-.toggle-theme:hover{
+.toggle-theme {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+}
+.close-btn {
+    margin-top: 20px;
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+}
+.toggle-theme:hover {
     background-color: rgb(200, 200, 200);
 }
+.close-btn:hover {
+    background-color: rgb(55, 55, 55);
+}
 .toggled{
-    background-color: rgb(25, 25, 25);
-    color: white;
-
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
 }
 .toggled:hover{
     background-color: rgb(55, 55, 55);
 }
-body{
-    display: flex;
-    flex-direction: column;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(25, 25, 25);
-    color: white;
-    align-items: center;
-    padding: 20px;
+.close-btn.toggled{
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
 }
-body.light-theme{
-    background-color: white;
-    color: rgb(25, 25, 25);
-}
-body.light-theme .container{
-    background-color: white;
-    color: rgb(25, 25, 25);
-    border-color: rgb(25, 25, 25);
-}
-p{
-    vertical-align: middle;
-    margin-right: 10px;
-}
-
-.container{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    text-align: center;
-    border: 3px solid white;
-    border-radius: 10px;
-    width: 550px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.container h2 p {
-    margin-top: 3.5vh;
+.close-btn.toggled:hover{
+    background-color: rgb(200, 200, 200);
 }
 .move-button{
     width: 120px;
@@ -81,30 +241,17 @@ body.light-theme .container .move-button{
     border-color: rgb(25, 25, 25);
 }
 body.light-theme .container .move-button:hover{
-    background-color: white;
     border-color: rgb(25, 25, 25);
     background-color: rgb(223, 222, 222);
 }
 .move-icon{
     height: 50px;
 }
-.title{
-    font-size: 30px;
-    font-weight: bold;
-}
-.score{
-    display: inline-block;
-    margin-top: 7vh;
-}
-.result{
-    font-size: 25px;
-    font-weight: bold;
-    margin-top: 7vh;
-}
 #resetScore{
-    background-color: white;
+    width: 120px;
+    background-color: var(--bg-color-light);
     padding: 8px 15px;
-    color: rgb(25, 25, 25);
+    color: var(--text-color-light);
     font-size: 15px;
     font-weight: bold;
     border-radius: 5px;
@@ -115,16 +262,53 @@ body.light-theme .container .move-button:hover{
     background-color: rgb(200, 200, 200);
 }
 body.light-theme #resetScore{
-    background-color: rgb(25, 25, 25);
-    color: white;
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
 }
 body.light-theme #resetScore:hover{
     background-color: rgb(88, 87, 87);
 }
 
+/* Animations */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+}
+
+/* Responsive design */
 @media (max-width: 600px) {
-    .container{
+    body{
+        margin-top: 30px;
+    }
+    .container, .result-container{
         width: 100%;
+    }
+    .pop-up-container{
+        margin-top: 10px;
+        width: 90%;
+        height: 90vh;
+    }
+    .pop-up-content{
+        left: 7%;
+        top: -5%;
+        width: 80%;
     }
     .move-button{
         width: 20vw;
@@ -136,11 +320,11 @@ body.light-theme #resetScore:hover{
         box-shadow: 0 0 4px #aaa;
         transform: scale(0.95);
     }
-    .container p{
+    .result-container p{
         font-size: 14px;
     }
-    .container h2 p{
-        font-size: 1.2rem;
+    .result{
+        font-size: 1.5rem;
     }
     .move-icon {
         height: 8vw;

@@ -17,15 +17,55 @@
             <button class="move-button" onclick="playGame('scissor')"><img src="icons/scissor-emoji.png" class="move-icon" alt="scissors"></button>
         </div>
         
-        <div class="container">
-            <h2><p class="result"></p></h2>
+        <div class="result-container">
+            <p class="result"></p>
             <p class="moves"></p>
-            <p class="score">Wins:<span id="win">0</span></p>
-            <p class="score">Loses:<span id="lose">0</span></p>
-            <p class="score">Ties:<span id="tie">0</span></p>
+            <p class="scores">Wins: <span id="win">0 </span> Loses: <span id="lose">0 </span> Ties: <span id="tie">0</span></p>
+            <p class="score">Total Score:<span id="total">0</span></p>
+            <p class="score">Tries Left: <span id="tries">50</span></p>
         </div>
-        <div class="container">
+        <div class="result-container">
+            <p class="score">Rank: <span id="rank">Newbie</span></p>
             <button id="resetScore" onclick="reset()">Reset Score</button>
+        </div>
+        <!-- Pop-up -->
+        <div class="pop-up-container" id="pop-up-container">
+            <div class="pop-up-content">
+                <p id="heading">Welcome to Rock Paper Scissors!</p>
+                <p>
+                    Rock Paper Scissors is a fun and interactive web-based game built using HTML, CSS, and JavaScript.<br><br> 
+                    Play against the computer and test your luck in this digital version of the timeless hand game! 
+                </p>
+                <ul>
+                    <li>✊ Rock beats Scissors</li>
+                    <li>✋ Paper beats Rock</li>
+                    <li>✌️ Scissors beats Paper</li>
+                </ul> 
+                <p>
+                    Each win gives you <b>+3 points</b>, a tie gives you <b>+1 point</b>, and a loss deducts <b>1 points</b>. <br>
+                    Rank is determined by your total points: 
+                </p>
+                    <ul>
+                        <li>Newbie (0-9)</li>
+                        <li>Beginner (10-29)</li>
+                        <li>Intermediate (30-49)</li>
+                        <li>Pro (50+)</li>
+                    </ul> 
+                <p>
+                    Try to reach the <b>Pro</b> rank!
+                </p>
+                <p id="did-you-know"><b>Fun Fact:</b><br><b>Did you know? </b><span id="fun-fact"></span></p>
+                <button class="close-btn">Start Game !</button>
+            </div>
+        </div>
+        <!-- Game Over Modal -->
+        <div id="game-over-modal" class="modal hide-model">
+            <div class="modal-content">
+                <h2>Game Over!</h2>
+                <p>You've reached the maximum of <b>50 tries</b>.</p>
+                <p>Your final score: <b><span id="final-score"></span></b></p>
+                <button id="restart-btn">Restart Game</button>
+            </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.min.js"></script>
         <script src="scripts.js"></script>
