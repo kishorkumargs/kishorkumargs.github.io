@@ -1,5 +1,5 @@
 // Variables and constants
-let score = JSON.parse(localStorage.getItem('score')) || {
+const score = JSON.parse(localStorage.getItem('score')) || {
                     win: 0,
                     lose: 0,
                     tie: 0,
@@ -10,9 +10,11 @@ let score = JSON.parse(localStorage.getItem('score')) || {
 let wins = document.getElementById('win');
 let loses = document.getElementById('lose');
 let ties = document.getElementById('tie');
+let total = document.getElementById('total');
 let resultText = document.querySelector('.result');
 let moves = document.querySelector('.moves');
 let rank = document.getElementById('rank');
+let highScore = parseInt(localStorage.getItem('high_score')) || 0;
 let tries = document.getElementById('tries');
 const toggleBtn = document.getElementById('theme-toggled');
 const gameOverModal = document.getElementById('game-over-modal');
@@ -36,6 +38,14 @@ const btnClickSound = new Howl({
     src: ['sounds/click.mp3'],
     volume: 1
 });
+const gameOverSound = new Howl({
+    src: ['sounds/game_over.wav'],
+    volume: 0.8
+});
+const highScoreSound = new Howl({
+    src:['sounds/high_score.wav'],
+    volume: 0.8
+});
 
 // Load saved score
 wins.textContent = score.win;
@@ -44,6 +54,8 @@ ties.textContent = score.tie;
 total.textContent = score.total;
 rank.textContent = score.rank;
 tries.textContent = 50 - score.tries;
+document.getElementById('high_score_main').textContent = highScore;
+document.getElementById('high_score_modal').textContent = highScore;
 
 // Load saved result and moves
 resultText.textContent = JSON.parse(localStorage.getItem('resultText')) || '';
@@ -62,10 +74,15 @@ if(savedTheme === 'light'){
 
 // Display random fun fact
 const facts = [
-  "Rock Paper Scissors originated in ancient China over 2000 years ago.",
-  `The game is known as "Jan-Ken" in Japan.`,
-  `It's used to make decisions fairly in many countries!`,
-  "In 2005, a man won a $20 million art deal using Rock Paper Scissors!"
+    "Rock Paper Scissors originated in ancient China over 2000 years ago.",
+    `The game is known as "Jan-Ken" in Japan.`,
+    `It's used to make decisions fairly in many countries!`,
+    "In 2005, a man won a $20 million art deal using Rock Paper Scissors!",
+    "Did you know that this game first appeared in China in the 17th century? Yes, it was not invented in Europe or America but in Asia. Europe started to play this game only in 19th century",
+    "Statistics say that people usually choose Scissors in the first round and Rock in the second",
+    "There is a robot developed in Japan which wins with 100% chance. It analyzes movement of your hand muscles to predict what choice you'll show",
+    "The World Rock Paper Scissors Championship has been held annually since 2002",
+    "There are online tournaments, local competitions, and even professional leagues with cash prizes reaching thousands of dollars"
 ];
 document.querySelector("#fun-fact").textContent = facts[Math.floor(Math.random() * facts.length)];
 
@@ -111,15 +128,15 @@ function pickComputerMove(){
 
 // Get rank based on total points
 function getRank(totalPoints){
-    if( totalPoints >= 50){
+    if( totalPoints >= 55){
         score.rank = 'Pro';
         return rank.textContent = score.rank;
     } 
-    else if( totalPoints >= 30){
+    else if( totalPoints >= 35){
         score.rank = 'Intermediate';
         return rank.textContent = score.rank;
     }
-    else if( totalPoints >= 10){
+    else if( totalPoints >= 20){
         score.rank = 'Beginner';
         return rank.textContent = score.rank;
     }
@@ -139,8 +156,18 @@ function playSound(result){
 function playGame(playerMove){
     // Check if a player reached 50 tries
     if(score.tries >= 50){
-        gameOverModal.classList.remove('hide-model');
-        document.getElementById('final-score').textContent = score.total;
+        gameOverSound.play();
+        setTimeout(() => {
+            gameOverModal.classList.remove('hide-model');
+            document.getElementById('final-score').textContent = score.total;
+            if(score.total > highScore){
+                highScoreSound.play();
+                highScore = score.total;
+                localStorage.setItem('high_score', highScore);
+            }
+            document.getElementById('high_score_main').textContent = highScore;
+            document.getElementById('high_score_modal').textContent = highScore;
+        }, 700);
         return;
     }
     const computerMove = pickComputerMove();

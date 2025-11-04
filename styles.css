@@ -33,7 +33,7 @@ body.light-theme .container, body.light-theme .result-container{
     border-color: rgb(25, 25, 25);
 }
 body.light-theme .pop-up-container{
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
     color: var(--text-color-dark);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
@@ -139,7 +139,7 @@ body.light-theme .modal-content {
 }
 
 #restart-btn {
-    background: var(--bg-color-dark);
+    background-color: var(--bg-color-dark);
     color: white;
     border: none;
     padding: 0.6rem 1.2rem;
@@ -147,7 +147,7 @@ body.light-theme .modal-content {
     cursor: pointer;
     margin-top: 1rem;
     font-weight: bold;
-    transition: background 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
 #restart-btn:hover {
@@ -186,7 +186,7 @@ body.light-theme #restart-btn {
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s ease;
 }
 .toggle-theme {
     position: absolute;
@@ -200,6 +200,7 @@ body.light-theme #restart-btn {
     margin-top: 20px;
     background-color: var(--bg-color-dark);
     color: var(--text-color-dark);
+    transition: background-color 0.2s ease;
 }
 .toggle-theme:hover {
     background-color: rgb(200, 200, 200);
@@ -229,7 +230,7 @@ body.light-theme #restart-btn {
     background-color: transparent;
     border: 3px solid white;
     cursor: pointer;
-    transition: background-color 0.1s;
+    transition: background-color 0.1s ease;
 }
 .move-button:active {
     background-color: rgb(73, 73, 73);
@@ -301,9 +302,11 @@ body.light-theme #resetScore:hover{
         width: 100%;
     }
     .pop-up-container{
+        padding-top: 25px;
+        overflow-y: auto;
         margin-top: 10px;
-        width: 90%;
-        height: 90vh;
+        width: 85%;
+        max-height: 85vh;
     }
     .pop-up-content{
         left: 7%;
